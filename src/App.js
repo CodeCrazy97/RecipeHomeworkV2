@@ -2,6 +2,7 @@ import "./App.css";
 import "./Page2.js";
 import image1 from "./Peanut-Butter-Banana-Smoothie.jpg";
 import React, { Component } from "react";
+import { throwStatement } from "@babel/types";
 
 // Declare our two recipes in JSON format.
 const recipes = [
@@ -46,14 +47,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { recipes };
-
+    this.isClicked = false;
     this.imageClick = this.imageClick.bind(this);
   }
 
   // imageClick: called when a recipe picture, title, or summary is clicked
   // Will take user to page that displays the details of the recipe.
-  imageClick = index => {
-    console.log("INSIDE 'MAIN'. index selected = " + index);
+  imageClick = (index, wasClicked) => {
+    console.log("wasClicked = " + wasClicked);
+    this.isClicked = !wasClicked;
+    this.setState({ isClicked: this.isClicked });
+    console.log(
+      "INSIDE 'MAIN'. index selected = " +
+        index +
+        ". isClicked ? " +
+        this.isClicked
+    );
     const myNode = document.getElementById("page");
     while (myNode.firstChild) {
       myNode.removeChild(myNode.firstChild);
@@ -63,14 +72,17 @@ class App extends Component {
   render() {
     return (
       <div id="page">
+        {console.log("called.")}
         <ul>
           {recipes.map((item, index) => (
             <div key={item.title}>
               <a
                 type="button"
                 className="card-link"
-                onClick={() => this.imageClick(index)}
+                {...console.log("clicked=" + this.isClicked)}
+                onClick={() => this.imageClick(index, this.isClicked)}
               >
+                {this.state.isClicked ? true : false}
                 <span>
                   <img src={item.image} />
                 </span>
@@ -86,6 +98,18 @@ class App extends Component {
             </div>
           ))}
         </ul>
+      </div>
+    );
+  }
+}
+
+class Recipe extends Component {
+  render() {
+    const { recipes, index } = this.props;
+    return (
+      <div>
+        {" "}
+        <h1>TITLE: {recipes[index].title}</h1>
       </div>
     );
   }
