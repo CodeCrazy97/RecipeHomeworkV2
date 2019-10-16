@@ -63,56 +63,54 @@ class App extends Component {
         ". isClicked ? " +
         this.isClicked
     );
+    /*
     const myNode = document.getElementById("page");
     while (myNode.firstChild) {
       myNode.removeChild(myNode.firstChild);
     }
+    */
   };
 
   render() {
-    return (
-      <div id="page">
-        {console.log("called.")}
-        <ul>
-          {recipes.map((item, index) => (
-            <div key={item.title}>
-              <a
-                type="button"
-                className="card-link"
-                {...console.log("clicked=" + this.isClicked)}
-                onClick={() => this.imageClick(index, this.isClicked)}
-              >
-                {this.state.isClicked ? true : false}
-                <span>
-                  <img src={item.image} />
-                </span>
-                <span>
-                  <h2 id={item.title}>{item.title}</h2>
-                </span>
-                <span>
-                  <h4>{item.summary}</h4>
-                </span>
-                <br />
-                <br />
-              </a>
-            </div>
-          ))}
-        </ul>
+    return !this.isClicked ? (
+      <div id="page0">
+        <div id="page">
+          {console.log("called.")}
+          <ul>
+            {recipes.map((item, index) => (
+              <div key={item.title}>
+                <a
+                  type="button"
+                  className="card-link"
+                  {...console.log("clicked=" + this.isClicked)}
+                  onClick={() => this.imageClick(index, this.isClicked)}
+                >
+                  {this.state.isClicked ? true : false}
+                  <span>
+                    <img src={item.image} />
+                  </span>
+                  <span>
+                    <h2 id={item.title}>{item.title}</h2>
+                  </span>
+                  <span>
+                    <h4>{item.summary}</h4>
+                  </span>
+                  <br />
+                  <br />
+                </a>
+              </div>
+            ))}
+          </ul>
+        </div>
       </div>
+    ) : (
+      <h1>Hello world</h1>
     );
   }
 }
 
-class Recipe extends Component {
-  render() {
-    const { recipes, index } = this.props;
-    return (
-      <div>
-        {" "}
-        <h1>TITLE: {recipes[index].title}</h1>
-      </div>
-    );
-  }
+function Recipe(recipes, index) {
+  return <h1>Ingredients: {recipes[index].ingredients}</h1>;
 }
 
 export default App;
