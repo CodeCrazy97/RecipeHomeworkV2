@@ -46,8 +46,11 @@ function imageClick(index) {
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = { recipes };
+
     this.isClicked = false;
+    this.selectedIndex = -1; // Keeps track of which index into the recipes array was clicked.
     this.imageClick = this.imageClick.bind(this);
   }
 
@@ -56,10 +59,14 @@ class App extends Component {
   imageClick = (index, wasClicked) => {
     console.log("wasClicked = " + wasClicked);
     this.isClicked = !wasClicked;
-    this.setState({ isClicked: this.isClicked });
+    this.selectedIndex = index;
+    this.setState({
+      isClicked: this.isClicked,
+      selectedIndex: this.selectedIndex
+    });
     console.log(
       "INSIDE 'MAIN'. index selected = " +
-        index +
+        this.selectedIndex +
         ". isClicked ? " +
         this.isClicked
     );
@@ -72,7 +79,9 @@ class App extends Component {
   };
 
   render() {
+    console.log("number of recipes: " + recipes.length);
     return !this.isClicked ? (
+      // A recipe has NOT yet been clicked; display the homepage with overview of recipes (nothing has been clicked yet).
       <div id="page0">
         <div id="page">
           {console.log("called.")}
@@ -104,7 +113,11 @@ class App extends Component {
         </div>
       </div>
     ) : (
-      <h1>Hello world</h1>
+      // A recipe has been clicked; display recipe details.
+      <div id="recipeDetails">
+        {console.log("s.i. : " + this.selectedIndex)}
+        <h1>Hi!</h1>
+      </div>
     );
   }
 }
