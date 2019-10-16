@@ -1,9 +1,7 @@
 import "./App.css";
-import "./Page2.js";
 import image1 from "./Peanut-Butter-Banana-Smoothie.jpg";
 import image2 from "./Sardines-and-Saltines.jpg";
 import React, { Component } from "react";
-import { throwStatement } from "@babel/types";
 
 // Declare our two recipes in JSON format.
 const recipes = [
@@ -11,7 +9,7 @@ const recipes = [
     image: image1,
     title: "Banana Peanut Smoothie",
     summary: "Yummy, easy, and smooth!",
-    steps: "1. Hello 2. World",
+    steps: "1. Put banana, peanut butter, milk and ice cream in blender. 2. Blend for 10 seconds. 3. Serve.",
     ingredients:
       "1 ripe banana, 1 Tbs of peanut butter, 3/4 cup of milk, 1 ice cube"
   },
@@ -19,30 +17,11 @@ const recipes = [
     image: image2,
     title: "Sardines & Saltines",
     summary: "Hearty & healthy",
-    steps: "1. Get peanut butter. 2. Whole wheat flour. 3. Eggs.",
+    steps: "1. Open sardine can. 2. Place sardines, peanut butter, and garnish on whole wheat crackers. 3. Serve.",
     ingredients:
-      "1 can of sardines, 8 whole wheat saltine crackers, lemon slice and parsley (optional)"
+      "1 can of sardines, 8 whole wheat saltine crackers, peanut butter (optional), lemon slice (optional), and parsley (optional)"
   }
 ];
-
-/*
-const imageClick = () => {
-  console.log("clicked : "); // works
-};
-*/
-
-/*
-// imageClick: called when a recipe picture, title, or summary is clicked
-// This function first removes all elements on the homepage, then it displays the details of the recipe
-// that was clicked.
-function imageClick(index) {
-  console.log("OUTSIDE 'MAIN'. index selected = " + index);
-  const myNode = document.getElementById("page");
-  while (myNode.firstChild) {
-    myNode.removeChild(myNode.firstChild);
-  }
-}
-*/
 
 // Called when Previous or Next buttons is clicked. Determines which recipe to display next.
 function displayOtherRecipe(index) {
